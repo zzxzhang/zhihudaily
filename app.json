@@ -15,6 +15,9 @@
     "updates": {
       "fallbackToCacheTimeout": 0
     },
+    "android": {
+      "package": "com.zzx.zhihu"
+    },
     "assetBundlePatterns": [
       "**/*"
     ],

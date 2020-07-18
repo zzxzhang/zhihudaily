@@ -29,8 +29,7 @@ export const isIos = () => {
 }
 
 export const useProxy = (target) => {
-  const localProxy = 'http://localhost:3000/proxy/';
-  const remoteProxy = 'https://www.zzx.plus/proxy/';
+  const localProxy = '/proxy/';
 
   return localProxy + encodeURIComponent(target);
 }

@@ -5,7 +5,6 @@ import * as React from 'react';
 import { ColorSchemeName } from 'react-native';
 
 import NotFoundScreen from '../screens/NotFoundScreen';
-import BottomTabNavigator from './BottomTabNavigator';
 import LinkingConfiguration from './LinkingConfiguration';
 
 import List from '../screens/list';
@@ -32,7 +31,6 @@ function RootNavigator() {
     <Stack.Navigator screenOptions={{ headerShown: false }}
       
     >
-      {/* <Stack.Screen name="Root" component={BottomTabNavigator} /> */}
       <Stack.Screen name="List" component={List} 
         options={{
           gestureDirection: "horizontal"

@@ -12,7 +12,6 @@ const listByDateApi = 'https://news-at.zhihu.com/api/4/stories/before/';
 const initStoriesApi = 'https://news-at.zhihu.com/api/4/stories/latest';
 
 const {width:windowWidth, height:windowHeight} = Dimensions.get('window')
-console.log(windowWidth)
 const listRef = React.createRef();
 let cache = {
   init: false,
