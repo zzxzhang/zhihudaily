@@ -49,7 +49,7 @@ export default function TabOneScreen({navigation: { navigate } }) {
       loading: true,
     }))
 
-    let targetUrl = useProxy(initStoriesApi);
+    let targetUrl = isNative() ? initStoriesApi : useProxy(initStoriesApi);
     // 获取stories
     fetch(targetUrl).then(res => {return res.json()}).then(data => {
       setState(state => ({
@@ -76,7 +76,7 @@ export default function TabOneScreen({navigation: { navigate } }) {
     let fetchPromises = [];
     const lastDate = parseInt(state.date);
 
-    let targetUrl = useProxy(listByDateApi);
+    let targetUrl = isNative() ? listByDateApi : useProxy(listByDateApi);
     for (let date = lastDate - 1; date >= lastDate - 3; date = yesterday(date)) {
       fetchPromises.push(
         fetch(`${targetUrl}${date}`).then(res => {return res.json()}))
