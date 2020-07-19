@@ -49,7 +49,7 @@ export default function TabOneScreen({navigation: { navigate } }) {
       loading: true,
     }))
 
-    let targetUrl = isNative() ? initStoriesApi : useProxy(initStoriesApi);
+    let targetUrl = useProxy(initStoriesApi);
     // 获取stories
     fetch(targetUrl).then(res => {return res.json()}).then(data => {
       setState(state => ({
@@ -76,7 +76,7 @@ export default function TabOneScreen({navigation: { navigate } }) {
     let fetchPromises = [];
     const lastDate = parseInt(state.date);
 
-    let targetUrl = isNative() ? listByDateApi : useProxy(listByDateApi);
+    let targetUrl = useProxy(listByDateApi);
     for (let date = lastDate - 1; date >= lastDate - 3; date = yesterday(date)) {
       fetchPromises.push(
         fetch(`${targetUrl}${date}`).then(res => {return res.json()}))
@@ -112,14 +112,6 @@ export default function TabOneScreen({navigation: { navigate } }) {
     })
   }
 
-  const renderSwiper = () => {
-    return state.banners.map(data => (
-      <View>
-        <Image source={data.image.replace('pic3', 'pic2')}/>
-      </View>)
-    )
-  }
-
   // stories列表
   const renderItem = ({ item }) => (
     <TouchableWithoutFeedback onPress={() => goToDetail(item.url)}>
@@ -142,46 +134,48 @@ export default function TabOneScreen({navigation: { navigate } }) {
 
   const renderBanner = ({item: data, index}, parallaxProps) => {
     return (
-      <View key={data['id'].toString()} style={styles.slide}>
-        {/* <Image style={{width: '100%', height: '100%'}} source={{uri: data.image.replace('pic3', 'pic2')}}/> */}
-        <ParallaxImage
-            source={{ uri: data.image.replace('pic3', 'pic2') }}
-            containerStyle={{width: windowWidth, height: '100%', flex: 1,}}
-            style={ styles.bannerImage }
-            parallaxFactor={0.1}
-            {...parallaxProps}
-        />
- 
-        <LinearGradient 
-          colors={[getRGBA(data.image_hue, 0),getRGBA(data.image_hue, 0.2),getRGBA(data.image_hue, 0.5), getRGBA(data.image_hue, 0.9),getRGBA(data.image_hue, 1)]}
-          style={{
-            position: 'absolute',
-            bottom: 0,
-            height: 110,
-            width: '100%',
-          }}
-        >
-          <Text 
+      <TouchableWithoutFeedback onPress={() => goToDetail(data.url)}>
+        <View key={data['id'].toString()} style={styles.slide}>
+          {/* <Image style={{width: '100%', height: '100%'}} source={{uri: data.image.replace('pic3', 'pic2')}}/> */}
+          <ParallaxImage
+              source={{ uri: data.image.replace('pic3', 'pic2') }}
+              containerStyle={{width: windowWidth, height: '100%', flex: 1,}}
+              style={ styles.bannerImage }
+              parallaxFactor={0.1}
+              {...parallaxProps}
+          />
+  
+          <LinearGradient 
+            colors={[getRGBA(data.image_hue, 0),getRGBA(data.image_hue, 0.2),getRGBA(data.image_hue, 0.5), getRGBA(data.image_hue, 0.9),getRGBA(data.image_hue, 1)]}
             style={{
-              paddingHorizontal:12,
-              fontSize: 23,
-              fontWeight: '700',
-              color: '#FFFFFF',
-            }}>
-            { data.title }
-          </Text>
-          <Text 
-            style={{
-              paddingHorizontal:12,
-              fontSize: 16,
-              marginTop: 6,
-              color: '#FFFFFF',
-              opacity: 0.6,
-            }}>
-            { data.hint }
-          </Text>
-        </LinearGradient>
-      </View>
+              position: 'absolute',
+              bottom: 0,
+              height: 110,
+              width: '100%',
+            }}
+          >
+            <Text 
+              style={{
+                paddingHorizontal:12,
+                fontSize: 23,
+                fontWeight: '700',
+                color: '#FFFFFF',
+              }}>
+              { data.title }
+            </Text>
+            <Text 
+              style={{
+                paddingHorizontal:12,
+                fontSize: 16,
+                marginTop: 6,
+                color: '#FFFFFF',
+                opacity: 0.6,
+              }}>
+              { data.hint }
+            </Text>
+          </LinearGradient>
+        </View>
+      </TouchableWithoutFeedback>
     )
   }
 

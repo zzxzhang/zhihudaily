@@ -4,8 +4,8 @@ export default {
   prefixes: [Linking.makeUrl('/')],
   config: {
     screens: {
-      List: 'list',
-      Detail: 'detail/:id',
+      List: '',
+      Detail: '#detail/:id',
       NotFound: '*',
     },
   },

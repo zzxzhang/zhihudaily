@@ -8,7 +8,7 @@ import NotFoundScreen from '../screens/NotFoundScreen';
 import LinkingConfiguration from './LinkingConfiguration';
 
 import List from '../screens/list';
-import Detail from '../screens/detail';
+import Detail from '../screens/detail.web';
 
 // If you are not familiar with React Navigation, we recommend going through the
 // "Fundamentals" guide: https://reactnavigation.org/docs/getting-started
